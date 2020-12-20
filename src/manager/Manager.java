@@ -25,7 +25,7 @@ public class Manager implements Runnable {
         boolean exit = false;
         try {
             File file = new File(INPUT_FILE);
-            if (!file.exists()) readError();
+            if (!file.exists()) fileNotFound();
             BufferedReader read = new BufferedReader(new FileReader(file));
             String line;
 
@@ -48,16 +48,17 @@ public class Manager implements Runnable {
                 room.addRoom(data);
                 break;
             case "RESERVATION":
-
+                System.out.println("RESERVATION");
                 break;
             case "HOTEL":
+                System.out.println("HOTEL");
                 break;
             default:
-                throw new MyException(MyException.READ_ERROR);
+                throw new MyException(MyException.WRONG_PARAMETER);
         }
     }
 
-    private void readError() throws MyException {
-        throw new MyException(MyException.READ_ERROR);
+    private void fileNotFound() throws MyException {
+        throw new MyException(MyException.FILE_NOT_FOUND);
     }
 }

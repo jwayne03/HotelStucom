@@ -28,12 +28,3 @@ RESERVATION 4A8754P8 5 balcon
 
 HOLA
 HOTEL
-
-
-
-
-
-
-
-
-
