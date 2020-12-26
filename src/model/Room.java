@@ -51,19 +51,28 @@ public class Room {
 
     public void addRoom(String[] data) {
         if (checkRoomId(Integer.parseInt(data[1]))) {
-            System.out.println(" --> Wrong room number " + data[1] + "<--");
+            wrongRoomNumber(data);
+        } else {
+            if (data[1].contentEquals("013") || data[1].contentEquals("113")) {
+                thisRoomCantBeAdded(data);
+                return;
+            } else {
+                roomAdded(data);
+            }
         }
+    }
 
-        if (data[1].contentEquals("013") || data[1].contentEquals("113")) {
-            thisRoomCantBeAdded(data);
-            return;
+    private void wrongRoomNumber(String[] data) {
+        if (data[3].isEmpty()) {
+            System.out.println(data[0] + " " + data[1] + " " + data[2]);
+        } else {
+            System.out.println(data[0] + " " + data[1] + " " + data[2] + " " + data[3]);
         }
-
-        roomAdded(data);
+        System.out.println(" --> Wrong room number " + data[1] + " <--");
     }
 
     private void thisRoomCantBeAdded(String[] data) {
-        System.out.println("ROOM " + Integer.parseInt(data[1])
+        System.out.println(data[0] + " " + Integer.parseInt(data[1])
                             + " " + Integer.parseInt(data[2])
                             + " " + Collections.singleton(data[3]));
         System.out.println(" --> No ROOM " + data[1] +" can be added. <-- ");
@@ -72,7 +81,7 @@ public class Room {
     private void roomAdded(String[] data) {
         if (data.length == 4) {
             rooms.add(new Room(Integer.parseInt(data[1]), Integer.parseInt(data[2]), Collections.singleton(data[3])));
-            System.out.println("ROOM " + Integer.parseInt(data[1])
+            System.out.println(data[0] + " " + Integer.parseInt(data[1])
                                 + " " + Integer.parseInt(data[2])
                                 + " " + Collections.singleton(data[3]));
             System.out.println(" --> new Room added " + data[1] + " <-- ");
@@ -80,7 +89,7 @@ public class Room {
 
         if (data.length == 3) {
             rooms.add(new Room(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
-            System.out.println("ROOM " + Integer.parseInt(data[1]) + " " + Integer.parseInt(data[2]));
+            System.out.println(data[0] + " " + Integer.parseInt(data[1]) + " " + Integer.parseInt(data[2]));
             System.out.println(" --> new Room added " + data[1] + " <-- ");
         }
     }

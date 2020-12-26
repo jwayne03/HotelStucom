@@ -4,6 +4,7 @@ import exception.MyException;
 import model.Room;
 
 import java.io.*;
+import java.util.Collections;
 
 public class Manager implements Runnable {
 
@@ -30,9 +31,11 @@ public class Manager implements Runnable {
             String line;
 
             while ((line = read.readLine()) != null && (!exit)) {
+                if (line.isEmpty()) throw new MyException(MyException.WRONG_PARAMETER);
                 try {
                     String[] data = line.split(" ");
                     dataManager(data);
+
                 } catch (MyException e) {
                     System.out.println(e.getMessage());
                 }
@@ -54,7 +57,17 @@ public class Manager implements Runnable {
                 System.out.println("HOTEL");
                 break;
             default:
+                checkRoomParameter(data);
                 throw new MyException(MyException.WRONG_PARAMETER);
+        }
+    }
+
+    private void checkRoomParameter(String[] data) throws MyException {
+        if (!data[0].equalsIgnoreCase("room")) {
+            System.out.println(data[0] + " " + Integer.parseInt(data[1])
+                    + " " + Integer.parseInt(data[2])
+                    + " " + Collections.singleton(data[3]));
+            throw new MyException(MyException.WRONG_PARAMETER);
         }
     }
 

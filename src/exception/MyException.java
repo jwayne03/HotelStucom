@@ -19,7 +19,7 @@ public class MyException extends Exception {
     private List<String> messege = Arrays.asList(
             " FILE NOT FOUND ",
             " READ ERROR ",
-            " WRONG PARAMETER ",
+            " Wrong parameter ",
             " ROOM WITHOUT SERVICE"
     );
 
