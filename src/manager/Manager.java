@@ -1,19 +1,25 @@
 package manager;
 
 import exception.MyException;
+import model.Hotel;
 import model.Room;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Collections;
 
 public class Manager implements Runnable {
 
     private static Manager manager;
     private Room room;
+    private Hotel hotel;
     private final String INPUT_FILE = "LoadHotel.txt";
 
     public Manager() {
         room = new Room();
+        hotel = new Hotel();
     }
 
     public static Manager getInstance() {
@@ -51,7 +57,7 @@ public class Manager implements Runnable {
                 room.addRoom(data);
                 break;
             case "RESERVATION":
-                System.out.println("RESERVATION");
+                hotel.reservation(data);
                 break;
             case "HOTEL":
                 System.out.println("HOTEL");

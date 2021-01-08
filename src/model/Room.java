@@ -29,24 +29,12 @@ public class Room {
         return room_id;
     }
 
-    public void setRoom_id(int room_id) {
-        this.room_id = room_id;
-    }
-
     public int getMax_size() {
         return max_size;
     }
 
-    public void setMax_size(int max_size) {
-        this.max_size = max_size;
-    }
-
     public Set<String> getService() {
         return service;
-    }
-
-    public void setService(Set<String> service) {
-        this.service = service;
     }
 
     public void addRoom(String[] data) {
