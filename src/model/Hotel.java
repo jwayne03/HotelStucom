@@ -8,7 +8,7 @@ public class Hotel {
 
     private int customer_id;
     private int capacity;
-    private Set<String> services;
+    private String services;
 
     private Room room;
     private List<Hotel> hotels;
@@ -17,7 +17,7 @@ public class Hotel {
 
     }
 
-    public Hotel(int customer_id, int capacity, Set<String> services) {
+    public Hotel(int customer_id, int capacity, String services) {
         this.customer_id = customer_id;
         this.capacity = capacity;
         this.services = services;
@@ -36,25 +36,25 @@ public class Hotel {
         return capacity;
     }
 
-    public Set<String> getServices() {
+    public String getServices() {
         return services;
     }
 
     public void reservation(String[] data) {
-        if (data.length == 2)
-            noRoomPreferences(data);
-        if (data.length == 3)
-            roomPreferences(data);
+//        if (data.length == 3)
+//            noRoomPreferences(data);
+//        if (data.length == 4)
+//            roomPreferences(data);
     }
 
-    private void roomPreferences(String[] data) {
-        hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2]), Collections.singleton(data[3])));
+//    private void roomPreferences(String[] data) {
+//        hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2]), data[3]));
+//
+//        System.out.println(data[0] + " " + data[1] + " " + data[2] + " " + data[3]);
+//    }
 
-        System.out.println(data[0] + " " + data[1] + " " + data[2] + " " + data[3] );
-    }
-
-    private void noRoomPreferences(String[] data) {
-        hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
-        System.out.println(data[0] + " " + data[1] + " " + data[2]);
-    }
+//    private void noRoomPreferences(String[] data) {
+//        hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
+//        System.out.println(data[0] + " " + data[1] + " " + data[2]);
+//    }
 }
