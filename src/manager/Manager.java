@@ -9,12 +9,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
-public class Manager implements Runnable {
+public class Manager {
 
     private static Manager manager;
     private Room room;
     private Hotel hotel;
+    private List<Room> rooms;
+    private List<Hotel> hotels;
     private final String INPUT_FILE = "LoadHotel.txt";
 
     public Manager() {
@@ -27,7 +30,6 @@ public class Manager implements Runnable {
         return manager;
     }
 
-    @Override
     public void run() {
         boolean exit = false;
         try {
@@ -52,29 +54,31 @@ public class Manager implements Runnable {
     }
 
     private void dataManager(String[] data) throws MyException {
+        rooms = room.getRooms();
         switch (data[0].toUpperCase()) {
             case "ROOM":
                 room.addRoom(data);
                 break;
             case "RESERVATION":
-                hotel.reservation(data);
+                hotel.reservation(room, data, rooms);
                 break;
             case "HOTEL":
                 System.out.println("HOTEL");
                 break;
             default:
-                checkRoomParameter(data);
+                if (checkRoomParameter(data)) throw new MyException(MyException.WRONG_PARAMETER);
                 throw new MyException(MyException.WRONG_PARAMETER);
         }
     }
 
-    private void checkRoomParameter(String[] data) throws MyException {
+    private boolean checkRoomParameter(String[] data) throws MyException {
         if (!data[0].equalsIgnoreCase("room")) {
             System.out.println(data[0] + " " + Integer.parseInt(data[1])
                     + " " + Integer.parseInt(data[2])
                     + " " + Collections.singleton(data[3]));
             throw new MyException(MyException.WRONG_PARAMETER);
         }
+        return false;
     }
 
     private void fileNotFound() throws MyException {

@@ -1,6 +1,10 @@
 package model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class Room {
 
@@ -23,6 +27,10 @@ public class Room {
     public Room(int room_id, int max_size) {
         this.room_id = room_id;
         this.max_size = max_size;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
     }
 
     public int getRoom_id() {
