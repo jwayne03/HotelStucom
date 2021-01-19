@@ -2,7 +2,8 @@ package model;
 
 import exception.MyException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
 
@@ -52,38 +53,30 @@ public class Hotel {
 
     private void roomPreferences(Room room, String[] data, List<Room> rooms) throws MyException {
         if (data[1].length() != 8) throw new MyException(MyException.WRONG_IDENTIFIER_FOR_RESERVATION);
-
-        if (data[1].matches("^[0-9]{8}")) {
-            addReservation(data, rooms);
-        } else {
-            throw new MyException(MyException.WRONG_IDENTIFIER_FOR_RESERVATION);
-        }
+        if (data[1].matches("^[0-9]{8}")) addReservation(data, rooms);
+        else throw new MyException(MyException.WRONG_IDENTIFIER_FOR_RESERVATION);
     }
 
+    // funcion que añade reservas en el hotel
     private void addReservation(String[] data, List<Room> rooms) throws MyException {
         searchRoom(data, rooms);
         hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2]), data[3]));
         System.out.println(data[0] + " " + data[1] + " " + data[2] + " " + data[3]);
         assigned(data, rooms);
-
     }
 
+    // función para poder buscar una habitacion con la capacidad que pide con la que se le puede ofrecer
     private void assigned(String[] data, List<Room> rooms) throws MyException {
-        for (Room room: rooms) {
-            if (Integer.parseInt(data[2]) == room.getMax_size()) {
-                System.out.println("--> Assigned " + data[1] + " to Room " + room.getRoom_id() + " <--");
-                return;
-            } else {
-                throw new MyException(MyException.CUSTOMER_NOT_ASIGNED);
-            }
+        for (Room room : rooms) {
+            if (Integer.parseInt(data[2]) == room.getMax_size()) System.out.println("--> Assigned " + data[1] + " to Room " + room.getRoom_id() + " <--");
+            else throw new MyException(MyException.CUSTOMER_NOT_ASIGNED);
         }
     }
 
+    // funcion que se encarga en buscar una habitación y devolver un ID
     private int searchRoom(String[] data, List<Room> rooms) throws MyException {
         for (Room room : rooms) {
-            if (Integer.parseInt(data[2]) == room.getMax_size()) {
-                return room.getRoom_id();
-            }
+            if (Integer.parseInt(data[2]) == room.getMax_size()) return room.getRoom_id();
         }
         throw new MyException(MyException.CUSTOMER_NOT_ASIGNED);
     }

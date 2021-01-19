@@ -114,6 +114,10 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room: " + "customer_id: " + room_id + " max_size: " + max_size + " service: " + service;
+        return "Room{" +
+                "room_id=" + room_id +
+                ", max_size=" + max_size +
+                ", service=" + service +
+                '}';
     }
 }

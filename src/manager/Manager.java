@@ -43,7 +43,6 @@ public class Manager {
                 try {
                     String[] data = line.split(" ");
                     dataManager(data);
-
                 } catch (MyException e) {
                     System.out.println(e.getMessage());
                 }
