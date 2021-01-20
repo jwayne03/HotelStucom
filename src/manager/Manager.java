@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class Manager {
             String line;
 
             while ((line = read.readLine()) != null && (!exit)) {
+                System.out.println(line);
                 if (line.isEmpty()) throw new MyException(MyException.WRONG_PARAMETER);
                 try {
                     String[] data = line.split(" ");
@@ -65,19 +67,8 @@ public class Manager {
                 System.out.println("HOTEL");
                 break;
             default:
-                if (checkRoomParameter(data)) throw new MyException(MyException.WRONG_PARAMETER);
                 throw new MyException(MyException.WRONG_PARAMETER);
         }
-    }
-
-    private boolean checkRoomParameter(String[] data) throws MyException {
-        if (!data[0].equalsIgnoreCase("room")) {
-            System.out.println(data[0] + " " + Integer.parseInt(data[1])
-                    + " " + Integer.parseInt(data[2])
-                    + " " + Collections.singleton(data[3]));
-            throw new MyException(MyException.WRONG_PARAMETER);
-        }
-        return false;
     }
 
     private void fileNotFound() throws MyException {

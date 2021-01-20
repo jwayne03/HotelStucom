@@ -57,32 +57,11 @@ public class Hotel {
         else throw new MyException(MyException.WRONG_IDENTIFIER_FOR_RESERVATION);
     }
 
-    // funcion que añade reservas en el hotel
     private void addReservation(String[] data, List<Room> rooms) throws MyException {
-        searchRoom(data, rooms);
         hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2]), data[3]));
-        System.out.println(data[0] + " " + data[1] + " " + data[2] + " " + data[3]);
-        assigned(data, rooms);
-    }
-
-    // función para poder buscar una habitacion con la capacidad que pide con la que se le puede ofrecer
-    private void assigned(String[] data, List<Room> rooms) throws MyException {
-        for (Room room : rooms) {
-            if (Integer.parseInt(data[2]) == room.getMax_size()) System.out.println("--> Assigned " + data[1] + " to Room " + room.getRoom_id() + " <--");
-            else throw new MyException(MyException.CUSTOMER_NOT_ASIGNED);
-        }
-    }
-
-    // funcion que se encarga en buscar una habitación y devolver un ID
-    private int searchRoom(String[] data, List<Room> rooms) throws MyException {
-        for (Room room : rooms) {
-            if (Integer.parseInt(data[2]) == room.getMax_size()) return room.getRoom_id();
-        }
-        throw new MyException(MyException.CUSTOMER_NOT_ASIGNED);
     }
 
     private void noRoomPreferences(Room room, String[] data, List<Room> rooms) {
         hotels.add(new Hotel(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
-        System.out.println(data[0] + " " + data[1] + " " + data[2]);
     }
 }
