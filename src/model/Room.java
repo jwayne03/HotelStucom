@@ -1,5 +1,7 @@
 package model;
 
+import persistence.FileManagement;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +15,11 @@ public class Room {
     private Set<String> service;
 
     private List<Room> rooms;
+    private FileManagement fileManagement;
 
     public Room() {
         rooms = new ArrayList<>();
+        fileManagement = new FileManagement();
     }
 
     public Room(int room_id, int max_size, Set<String> service) {
@@ -47,10 +51,10 @@ public class Room {
 
     public void addRoom(String[] data) {
         if (checkRoomId(Integer.parseInt(data[1]))) {
-            System.out.println(" --> Wrong room number " + data[1] + " <--");
+            fileManagement.saveData("--> Wrong room number " + data[1] + " <--");
         } else {
             if (data[1].contentEquals("013") || data[1].contentEquals("113")) {
-                System.out.println(" --> No ROOM " + data[1] +" can be added. <-- ");
+                fileManagement.saveData("--> No ROOM " + data[1] +" can be added. <--");
                 return;
             } else {
                 roomAdded(data);
@@ -61,12 +65,12 @@ public class Room {
     private void roomAdded(String[] data) {
         if (data.length == 4) {
             rooms.add(new Room(Integer.parseInt(data[1]), Integer.parseInt(data[2]), Collections.singleton(data[3])));
-            System.out.println(" --> new Room added " + data[1] + " <-- ");
+            fileManagement.saveData("--> new Room added " + data[1] + " <--");
         }
 
         if (data.length == 3) {
             rooms.add(new Room(Integer.parseInt(data[1]), Integer.parseInt(data[2])));
-            System.out.println(" --> new Room added " + data[1] + " <-- ");
+            fileManagement.saveData("--> new Room added " + data[1] + " <--");
         }
     }
 

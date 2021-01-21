@@ -3,6 +3,7 @@ package manager;
 import exception.MyException;
 import model.Hotel;
 import model.Room;
+import persistence.FileManagement;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,7 +22,10 @@ public class Manager {
     private List<Hotel> hotels;
     private final String INPUT_FILE = "LoadHotel.txt";
 
+    private FileManagement fileManagement;
+
     public Manager() {
+        fileManagement = new FileManagement();
         room = new Room();
         hotel = new Hotel();
     }
@@ -40,17 +44,17 @@ public class Manager {
             String line;
 
             while ((line = read.readLine()) != null && (!exit)) {
-                System.out.println(line);
+                fileManagement.saveData(line);
                 if (line.isEmpty()) throw new MyException(MyException.WRONG_PARAMETER);
                 try {
                     String[] data = line.split(" ");
                     dataManager(data);
                 } catch (MyException e) {
-                    System.out.println(e.getMessage());
+                    fileManagement.saveData(e.getMessage());
                 }
             }
         } catch (MyException | IOException e) {
-            System.out.println(e.getMessage());
+            fileManagement.saveData(e.getMessage());
         }
     }
 
